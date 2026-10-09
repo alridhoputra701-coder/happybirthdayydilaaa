@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>HBD Latyshaá 🎂</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;overflow:hidden}
+body{font-family:Quicksand,sans-serif;display:flex;justify-content:center;align-items:center;background:#fce4ec center/cover no-repeat;transition:.8s}
+
+/* LOADER KUE */
+#loader{position:fixed;inset:0;z-index:500;background:#1a1a1a;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:.8s}
+#loader.hide{opacity:0;visibility:hidden}
+.cake-stack{position:relative;width:220px;height:200px;display:flex;justify-content:center;align-items:flex-end;margin-bottom:20px}
+.fc{position:absolute;border-radius:6px;box-shadow:inset 0 -6px 0 rgba(0,0,0,.08),0 6px 14px rgba(0,0,0,.3);opacity:0;animation:drop .55s cubic-bezier(.34,1.56,.64,1) forwards;z-index:1}
+.fc::before{content:'';position:absolute;top:-10px;left:-4px;right:-4px;height:18px;background:linear-gradient(#fff,#fce4ec);border-radius:50% 50% 40% 40% / 100% 100% 40% 40%;z-index:2}
+.c1{width:180px;height:38px;bottom:0;background:linear-gradient(#ffe4e9,#ffb3c6);animation-delay:.15s}
+.c2{width:150px;height:38px;bottom:38px;background:linear-gradient(#ffd1dc,#ff9eb5);animation-delay:.55s}
+.c3{width:120px;height:38px;bottom:76px;background:linear-gradient(#ffb6c1,#ff8fab);animation-delay:.95s}
+.c4{width:90px;height:34px;bottom:114px;background:linear-gradient(#f5e6d3,#e8d4b8);animation-delay:1.35s}
+.c5{width:60px;height:28px;bottom:148px;background:linear-gradient(#fff5e1,#f5d9a0);animation-delay:1.75s}
+@keyframes drop{0%{opacity:0;transform:translateY(-400px) rotate(-15deg)}60%{opacity:1;transform:translateY(10px) rotate(3deg)}80%{transform:translateY(-4px)}100%{opacity:1;transform:translateY(0)}}
+.cdl{position:absolute;width:5px;height:28px;bottom:176px;left:50%;margin-left:-2.5px;background:linear-gradient(to right,#fff,#e0e0e0);border-radius:2px;opacity:0;animation:drop .5s ease 2.15s forwards;z-index:5}
+.fire{position:absolute;width:10px;height:16px;bottom:206px;left:50%;margin-left:-5px;background:radial-gradient(ellipse at bottom,#ffdd00,#ff9900 40%,#ff5500 80%,transparent);border-radius:50% 50% 50% 50% / 60% 60% 40% 40%;box-shadow:0 0 15px #ff9900,0 0 30px #ff5500;opacity:0;animation:drop .5s ease 2.55s forwards,flicker .3s infinite alternate 3.05s;z-index:6}
+@keyframes flicker{to{transform:scale(1.1) rotate(2deg)}}
+.load-text{margin-top:20px;font-size:14px;letter-spacing:.3em;color:#f8bbd0;text-transform:uppercase;font-weight:600;animation:pulse 1.5s ease-in-out infinite;text-align:center}
+.load-text small{display:block;font-size:10px;color:#cc7d2d;margin-top:6px}
+@keyframes pulse{50%{opacity:.5}}
+
+/* CARD */
+.card-container{position:relative;z-index:10;width:90%;max-width:400px;padding:24px;border-radius:28px;text-align:center;display:none;background:rgba(255,255,255,.18);backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,.35);box-shadow:0 8px 32px rgba(0,0,0,.25);animation:ci .9s both;transition:max-width .4s;overflow:hidden}
+@keyframes ci{from{opacity:0;transform:translateY(20px)}}
+.card-container.gallery-open{max-width:800px;padding:20px}
+.slide{display:none}
+.slide.active{display:block;animation:si .9s both}
+@keyframes si{from{opacity:0;transform:translateY(14px);filter:blur(6px)}}
+h2{font-family:'Fredoka One',cursive;color:#fff;margin-bottom:15px;font-size:1.6rem;text-shadow:0 2px 12px rgba(233,30,99,.65);min-height:1.6em}
+p{font-size:1rem;color:#fff;line-height:1.6;margin-bottom:15px;min-height:60px;text-shadow:0 1px 8px rgba(0,0,0,.55)}
+.cursor{display:inline-block;width:2px;height:1em;background:#fff;margin-left:2px;vertical-align:-2px;animation:bk .8s steps(1) infinite}
+@keyframes bk{51%{opacity:0}}
+.cursor.done{display:none}
+.photo-frame{width:100%;height:340px;border-radius:15px;overflow:hidden;border:4px solid rgba(255,255,255,.55);margin-bottom:15px;background:rgba(255,255,255,.2)}
+.photo-frame img{width:100%;height:100%;object-fit:cover}
+
+/* SLIDE 14 — POLAROID SCRAPBOOK (hover naik ke atas) */
+.scrap{position:relative;width:100%;height:calc(100vh - 320px);max-height:460px;min-height:340px;padding:16px 12px;margin-bottom:15px;border-radius:18px;background:rgba(255,255,255,.12);overflow-y:scroll;overflow-x:hidden;touch-action:pan-y;overscroll-behavior:contain;border:2px solid rgba(255,255,255,.35);-webkit-overflow-scrolling:touch}
+.scrap::-webkit-scrollbar{width:5px}
+.scrap::-webkit-scrollbar-thumb{background:rgba(233,30,99,.6);border-radius:5px}
+.scrap-in{position:relative;width:100%;height:0}
+.scrap .pol{position:absolute;background:#fff8ee;padding:7px 7px 24px;border-radius:3px;box-shadow:0 4px 10px rgba(0,0,0,.2);cursor:pointer;transition:transform .35s,box-shadow .35s;z-index:2}
+.scrap .pol img{width:100%;height:100%;object-fit:cover;border-radius:2px;display:block;pointer-events:none;background:#111}
+.scrap .pol::before{content:'';position:absolute;top:-6px;left:50%;transform:translateX(-50%) rotate(-3deg);width:44px;height:13px;background:rgba(255,232,170,.85);box-shadow:0 1px 2px rgba(0,0,0,.1);z-index:3}
+.scrap .pol:nth-child(3n+2)::before{background:rgba(255,182,213,.85)}
+.scrap .pol .sk{position:absolute;left:-10px;top:8%;font-size:22px;pointer-events:none;z-index:4}
+.scrap .pol .ht{position:absolute;right:-4px;bottom:-6px;font-size:20px;pointer-events:none;z-index:4}
+.scrap .pol:hover,.scrap .pol.on{transform:translateY(-14px) scale(1.06) rotate(0deg) !important;box-shadow:0 18px 30px rgba(0,0,0,.4);z-index:20}
+.scrap .pol.on{outline:3px solid #ff5fa2;outline-offset:2px}
+
+/* VIDEO */
+.video-container{position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.85);display:none;justify-content:center;align-items:center;padding:30px 20px}
+.video-box{position:relative;width:min(720px,92vw);aspect-ratio:4/3;max-height:82vh;padding:14px;border-radius:22px;background:linear-gradient(135deg,rgba(255,214,232,.35),rgba(255,95,162,.28));border:2px dashed rgba(255,255,255,.6);display:flex;align-items:center;justify-content:center}
+.video-box::before,.video-box::after{content:'🎀';position:absolute;font-size:32px;z-index:5}
+.video-box::before{top:-16px;left:-10px;transform:rotate(-20deg)}
+.video-box::after{bottom:-16px;right:-10px;transform:rotate(20deg)}
+.video-inner{position:relative;width:100%;height:100%;border-radius:14px;overflow:hidden;background:#000;border:3px solid rgba(255,255,255,.85)}
+.video-inner video{width:100%;height:100%;object-fit:cover;display:block}
+.video-buttons{position:absolute;left:0;right:0;bottom:-64px;display:flex;justify-content:center}
+
+/* PUZZLE HATI */
+#puzzle{position:fixed;inset:0;z-index:120;background:linear-gradient(160deg,#ffd6e8,#ff9ec4 60%,#e879b9);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;text-align:center;color:#fff;transition:.6s}
+#puzzle h3{font-family:'Fredoka One',cursive;font-size:1.5rem;text-shadow:0 2px 10px rgba(233,30,99,.6);margin-bottom:6px}
+#puzzle .pz-sub{font-size:.9rem;text-shadow:0 1px 6px rgba(0,0,0,.4);margin-bottom:12px;min-height:0}
+.pz-top{display:flex;align-items:center;gap:14px;margin-bottom:12px}
+#pzPrev{width:64px;height:64px;background-size:cover;background-position:center;clip-path:url(#heartClip);filter:drop-shadow(0 2px 4px rgba(0,0,0,.3))}
+.pz-board{position:relative;width:min(86vw,380px);aspect-ratio:1/1;background:rgba(255,255,255,.25);border-radius:14px;touch-action:none;user-select:none;-webkit-user-select:none;transition:.6s}
+.pz-t{position:absolute;box-sizing:border-box;border:2px solid #fff;border-radius:6px;background-repeat:no-repeat;cursor:pointer;transition:left .25s,top .25s,border .4s,border-radius .4s;touch-action:none}
+.pz-t.sel{outline:4px solid #ff2d87;outline-offset:-4px;z-index:5;transform:scale(.94)}
+.pz-board.solved{background:transparent;clip-path:url(#heartClip);animation:hb 1.1s ease-in-out infinite;filter:drop-shadow(0 6px 10px rgba(0,0,0,.35))}
+.pz-board.solved .pz-t{border-color:transparent;border-radius:0;pointer-events:none}
+@keyframes hb{50%{transform:scale(1.05)}}
+.pz-info{margin-top:14px;font-weight:600;text-shadow:0 1px 6px rgba(0,0,0,.4)}
+.pz-actions{display:flex;gap:10px;margin-top:12px}
+#pzEnter{display:none;font-size:1.05rem;padding:14px 34px}
+
+/* NAV */
+.nav-buttons{display:flex;justify-content:space-between;margin-top:12px}
+button{color:#fff;border:1px solid rgba(255,255,255,.45);padding:12px 25px;border-radius:25px;font-weight:bold;cursor:pointer;font-family:inherit;transition:.3s;background:rgba(255,255,255,.18);backdrop-filter:blur(10px);text-shadow:0 1px 4px rgba(0,0,0,.4)}
+button:hover{background:rgba(233,30,99,.55);transform:scale(1.05)}
+button:disabled{opacity:.5;cursor:not-allowed;transform:none}
+
+/* START */
+#start-screen{position:fixed;inset:0;background:url(https://i.imgur.com/ZrXnskz.jpg) center/cover;z-index:50;display:flex;flex-direction:column;justify-content:center;align-items:center;color:#fff}
+#start-screen h1{font-family:'Fredoka One',cursive;font-size:2.5rem;margin-bottom:20px;text-shadow:2px 2px 10px rgba(0,0,0,.6);text-align:center;padding:0 20px}
+
+#confetti-canvas{position:fixed;inset:0;pointer-events:none;z-index:150;display:none}
+
+/* MUSIC PLAYER MINI */
+.mp-wrap{position:fixed;bottom:16px;right:16px;z-index:60;user-select:none}
+.mp-card{display:flex;flex-direction:column;background:#fff;border-radius:9999px;box-shadow:0 6px 20px rgba(0,0,0,.28);padding:6px;transition:.35s;overflow:hidden}
+.mp-row{display:flex;align-items:center}
+.mp-play-btn{width:38px;height:38px;border-radius:50%;border:none;background:linear-gradient(135deg,#a855f7,#7c3aed);box-shadow:0 3px 10px rgba(124,58,237,.5);display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0;flex-shrink:0;transition:.2s}
+.mp-play-btn:hover{transform:scale(1.08)}
+.mp-play-btn svg{width:18px;height:18px;display:block}
+.mp-progress{display:flex;align-items:center;width:0;opacity:0;overflow:hidden;transition:.35s;margin:0}
+.mp-wrap:hover .mp-progress{width:110px;opacity:1;margin:0 8px}
+.mp-range{flex:1;height:4px;background:#cbd5e1;border-radius:9999px;appearance:none;-webkit-appearance:none;cursor:pointer;outline:none}
+.mp-range::-webkit-slider-thumb{-webkit-appearance:none;width:12px;height:12px;border-radius:50%;background:#a855f7;border:2px solid #fff;cursor:pointer}
+.mp-mini-btn{width:0;height:32px;border-radius:50%;border:none;background:transparent;display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0;overflow:hidden;opacity:0;flex-shrink:0;transition:.3s}
+.mp-wrap:hover .mp-mini-btn{width:32px;opacity:1}
+.mp-mini-btn:hover{background:rgba(0,0,0,.06)}
+.mp-mini-btn svg{width:14px;height:14px;display:block}
+.mp-expand{display:flex;align-items:center;height:0;overflow:hidden;transition:.35s;padding:0 6px;opacity:0}
+.mp-wrap:hover .mp-expand{height:56px;padding:6px 8px 4px;opacity:1}
+.mp-mini-disc{width:44px;height:44px;flex-shrink:0;animation:mp-spin 3s linear infinite;margin-right:10px}
+.mp-mini-disc svg{width:100%;height:100%;display:block}
+@keyframes mp-spin{to{transform:rotate(360deg)}}
+.mp-meta{overflow:hidden;white-space:nowrap}
+.mp-title{font-size:13px;font-weight:700;color:#18181b;margin:0 0 2px 0;min-height:0;text-shadow:none}
+.mp-artist{font-size:10px;color:#52525b;margin:0;min-height:0;text-shadow:none}
+
+@media(max-width:480px){
+  .card-container.gallery-open{max-width:94%}
+  .scrap{height:calc(100vh - 260px);max-height:420px;min-height:340px}
+  .video-box{padding:10px}
+  .video-buttons{bottom:-58px}
+  .mp-wrap{bottom:12px;right:12px;transform:scale(.9);transform-origin:bottom right}
+}
+</style>
+</head>
+<body>
+
+<div id="loader">
+  <div class="cake-stack">
+    <div class="fc c1"></div><div class="fc c2"></div><div class="fc c3"></div>
+    <div class="fc c4"></div><div class="fc c5"></div>
+    <div class="cdl"></div><div class="fire"></div>
+  </div>
+  <div class="load-text">Memuat Kejutan…<small>for Latyshaá 🎂</small></div>
+</div>
+
+<audio id="bg-music" loop><source src="abt.mp3" type="audio/mpeg"></audio>
+
+<div id="music-player" class="mp-wrap">
+  <div class="mp-card">
+    <div class="mp-expand">
+      <div class="mp-mini-disc">
+        <svg viewBox="0 0 96 96"><circle cx="48" cy="48" r="46" fill="#0a0a0a"/><circle cx="48" cy="48" r="30" fill="none" stroke="#1a1a1a"/><circle cx="48" cy="48" r="16" fill="#a855f7"/><circle cx="48" cy="48" r="10" fill="#c084fc"/><circle cx="48" cy="48" r="2" fill="#0a0a0a"/></svg>
+      </div>
+      <div class="mp-meta"><p class="mp-title">about you </p><p class="mp-artist">the 1975</p></div>
+    </div>
+    <div class="mp-row">
+      <button class="mp-play-btn" id="mpPlayBtn">
+        <svg id="mpPlayIcon" viewBox="0 0 24 24"><polygon points="6 3 20 12 6 21 6 3" fill="#fff"/></svg>
+        <svg id="mpPauseIcon" viewBox="0 0 24 24" style="display:none"><rect x="6" y="4" width="4" height="16" fill="#fff"/><rect x="14" y="4" width="4" height="16" fill="#fff"/></svg>
+      </button>
+      <div class="mp-progress"><input type="range" min="0" max="100" value="0" class="mp-range" id="mpRange"/></div>
+      <button class="mp-mini-btn" onclick="rewindMusic()"><svg viewBox="0 0 24 24" fill="#555"><polygon points="19 20 9 12 19 4 19 20"/><rect x="4" y="5" width="2" height="14"/></svg></button>
+      <button class="mp-mini-btn" onclick="forwardMusic()"><svg viewBox="0 0 24 24" fill="#555"><polygon points="5 4 15 12 5 20 5 4"/><rect x="18" y="5" width="2" height="14"/></svg></button>
+    </div>
+  </div>
+</div>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><clipPath id="heartClip" clipPathUnits="objectBoundingBox"><path d="M0.5,0.95 C0.5,0.95 0.02,0.62 0.02,0.30 C0.02,0.12 0.16,0.03 0.28,0.03 C0.38,0.03 0.46,0.09 0.5,0.18 C0.54,0.09 0.62,0.03 0.72,0.03 C0.84,0.03 0.98,0.12 0.98,0.30 C0.98,0.62 0.5,0.95 0.5,0.95 Z"/></clipPath></defs></svg>
+
+<div id="puzzle">
+  <h3>mini puzzle game</h3>
+  <p class="pz-sub">Sentuh 2 kotak untuk saling tukar, atau geser satu ke kotak lain</p>
+  <div class="pz-top"><div id="pzPrev"></div><div class="pz-info" id="pzInfo">Langkah: 0</div></div>
+  <div class="pz-board" id="pzBoard"></div>
+  <div class="pz-actions">
+    <button id="pzShuffle">🔀 acak ulang</button>
+    <button id="pzEnter">letss open 🎁</button>
+  </div>
+</div>
+
+<div id="start-screen">
+<h1>Happy Birthday<br>Latyshaá! 🎂</h1>
+<button onclick="startJourney()" style="font-size:1.2rem;padding:15px 40px;">open 🎁</button>
+</div>
+
+<div class="card-container" id="main-card">
+
+<div class="slide active" id="slide1" data-bg="https://i.imgur.com/MlOgaJB.jpeg">
+<h2 class="tw-title" data-full="Holaaá mi amorr"></h2>
+<div class="photo-frame"><img src="https://i.imgur.com/lDRf3MJ.gif" alt="F1"></div>
+<p class="tw-text" data-full="welcome dilala hermosás di perjalanan kecil spesial buat kamu hari ini..."></p>
+</div>
+
+<div class="slide" id="slide2" data-bg="https://i.imgur.com/MlOgaJB.jpeg">
+<h2 class="tw-title" data-full="do you remember this? 🍭"></h2>
+<div class="photo-frame"><img src="https://i.imgur.com/VrVXmPN.png" alt="F2"></div>
+<p class="tw-text" data-full="first time bikin trendd di robloxx with umoiii gemas"></p>
+</div>
+
+<div class="slide" id="slide3" data-bg="https://i.imgur.com/MlOgaJB.jpeg">
+<h2 class="tw-title" data-full="you're so cutee"></h2>
+<div class="photo-frame"><img src="https://i.imgur.com/sGJPDdQ.jpeg" alt="F3"></div>
+<p class="tw-text" data-full="cieee yang lagi ulang tahun,congratss my dear."></p>
+</div>
+
+<div class="slide" id="slide4" data-bg="https://i.imgur.com/MlOgaJB.jpeg">
+<h2 class="tw-title" data-full="morning sunshine"></h2>
+<div class="photo-frame"><img src="https://i.imgur.com/UushcWI.gif" alt="F4"></div>
+<p class="tw-text" data-full="Kamu selalu punya energi positif yang nular ke orang sekitar,still happy dilaaaa."></p>
+</div>
+
+<div class="slide" id="slide5" data-bg="https://i.imgur.com/MlOgaJB.jpeg">
+<h2 class="tw-title" data-full="mabar and yapping(⸝⸝> ᴗ•⸝⸝)"></h2>
+<div class="photo-frame"><img src="https://i.imgur.com/DpJ2Wm6.gif" alt="F5"></div>
+<p class="tw-text" data-full="best moment yang paling gua sukainn yaitu mabar bertiga sama kynthaa and youu,truss kitaa yapping sampe malemm."></p>
+</div>
+
+<div class="slide" id="slide6" data-bg="https://i.imgur.com/MlOgaJB.jpeg">
+<h2 class="tw-title" data-full="if only you knew"></h2>
+<div class="photo-frame"><img src="https://i.imgur.com/M47H8o0.gif" alt="F6"></div>
+<p class="tw-text" data-full="maaf yaa gabisa dateng ke acara ultah luu,perhaps in another time kita bisa ngerayain berduaa dilaaaa"></p>
+</div>
+
+<div class="slide" id="slide7" data-bg="https://i.imgur.com/MlOgaJB.jpeg">
+<h2 class="tw-title" data-full="yeayyyy umur bertambah"></h2>
+<div class="photo-frame"><img src="https://i.imgur.com/GbYtWRK.gif" alt="F7"></div>
+<p class="tw-text" data-full="i hope from this year and all years to come kamu bisa dapetin apa yang dila harapin dan semoga jadi orang yang selalu diberi kesehatan ya dilalalalala."></p>
+</div>
+
+<div class="slide" id="slide9" data-bg="https://i.imgur.com/TlpAkhr.png">
+<h2 class="tw-title" data-full="Petualangan Kita 🗺️"></h2>
+<div class="photo-frame"><img src="https://i.imgur.com/Tqa4NmW.png" alt="F9"></div>
+<p class="tw-text" data-full="meski sekarang kitaa cuma bisa explore di roblox,but i'm so happy tahun depan kalo kita masi belum asing kita jalan jalan in real life yaakkkk"></p>
+</div>
+
+<div class="slide" id="slide10" data-bg="https://i.imgur.com/TlpAkhr.png">
+<h2 class="tw-title" data-full="Teman Curhat (˶˃ ᵕ ˂˶)"></h2>
+<div class="photo-frame"><img src="https://i.imgur.com/Xzymg2N.gif" alt="F10"></div>
+<p class="tw-text" data-full="Makasih udah selalu mau dengerin cerita aku."></p>
+</div>
+
+<div class="slide" id="slide11" data-bg="https://i.imgur.com/wgjk0A4.jpeg">
+<h2 class="tw-title" data-full="this is happy day for youu"></h2>
+<div class="photo-frame"><img src="https://i.imgur.com/vIv2CgY.png" alt="F11"></div>
+<p class="tw-text" data-full="cihuyyy ultahh,oh yaa btw gua ngasih sesuatu ke lu,yaa nyamoe nya masi lama sih ke lu tapi gua harap lu suka yaak(„• ֊ •„)" ."></p>
+</div>
+
+<div class="slide" id="slide12" data-bg="https://images.unsplash.com/photo-1490750967868-58cb7506aed6?q=80&w=1000">
+<h2 class="tw-title" data-full="Doa Terbaik 🙏"></h2>
+<div class="photo-frame"><img src="https://i.imgur.com/pgCiYDq.gif" alt="F12"></div>
+<p class="tw-text" data-full="i hope kamuu selalu diberi kesehatan dan kebahagiaan yang selalu bikin hari hari lu ceria,happy Birthday dilaaaa."></p>
+</div>
+
+<div class="slide" id="slide13" data-bg="https://images.unsplash.com/photo-1513151233558-d860c5398176?q=80&w=1000">
+<h2 class="tw-title" data-full="Wish List 📝"></h2>
+<div class="photo-frame"><img src="https://i.imgur.com/GIhdJHG.gif" alt="F13"></div>
+<p class="tw-text" data-full="Apapun impianmu tahun ini, aku yakin kamu pasti bisa capai!"></p>
+</div>
+
+<div class="slide" id="slide14" data-bg="https://i.imgur.com/ny2plkG.jpeg">
+<h2 class="tw-title" data-full="Album Kenangan 📸"></h2>
+<div class="scrap" id="scrap"></div>
+<p class="tw-text" data-full="10 potret kecil yang aku simpan buat kamu — scroll ke bawah ya untuk lihat semuanya."></p>
+</div>
+
+<div class="slide" id="slide15" data-bg="S3.jpg">
+<h2 class="tw-title" data-full="Happy Birthday Latyshaá! 🎂"></h2>
+<div class="photo-frame"><img src="CK.jpg" alt="F15"></div>
+<p class="tw-text" data-full="i have something for you...... are you ready latyshaaaá??"></p>
+</div>
+<div class="nav-buttons">
+<button id="prevBtn" onclick="changeSlide(-1)" disabled>Kembali</button>
+<button id="nextBtn" onclick="nextAction()">Lanjut</button>
+</div>
+</div>
+
+<div class="video-container" id="final-video">
+<div class="video-box">
+<div class="video-inner">
+<video id="memorable-video" controls><source src="https://streamable.com/dtnx0k" type="video/mp4"></video>
+</div>
+<div class="video-buttons"><button onclick="closeVideo()">Kembali</button></div>
+</div>
+</div>
+
+<canvas id="confetti-canvas"></canvas>
+
+<script>
+var slides=Array.prototype.slice.call(document.querySelectorAll('.slide'));
+var idx=0,total=slides.length,music=document.getElementById('bg-music'),playing=false,tt={};
+
+var GP=[
+"https://i.imgur.com/lDRf3MJ.gif",
+"https://i.imgur.com/VrVXmPN.png",
+"https://i.imgur.com/sGJPDdQ.jpeg",
+"https://i.imgur.com/UushcWI.gif",
+"https://i.imgur.com/DpJ2Wm6.gif",
+"https://i.imgur.com/M47H8o0.gif",
+"https://i.imgur.com/GbYtWRK.gif",
+"https://i.imgur.com/opkz2bn.jpeg",
+"https://i.imgur.com/Tqa4NmW.png",
+"https://i.imgur.com/Xzymg2N.gif"
+];
+
+/* BUILD POLAROID SCRAPBOOK */
+(function(){
+  var board=document.getElementById('scrap');
+  if(!board)return;
+  var inner=document.createElement('div');
+  inner.className='scrap-in';
+  board.appendChild(inner);
+  var SK=['🐰','🩹','🐻','🦕','🍄','🐶','⭐','🐱','🌼','🐛'];
+  var HT=['💜','💗'];
+
+  function build(){
+    inner.innerHTML='';
+    var W=board.clientWidth-24-8, gap=14;
+    var cw=Math.floor((W-gap)/2), ch=Math.round(cw*1.0), rh=ch+46;
+    var maxB=0;
+
+    GP.forEach(function(src,i){
+      var col=i%2, row=Math.floor(i/2);
+      var x=col*(cw+gap)+(col?0:2), y=10+row*rh+(col?8:0);
+      var rot=[-3,2,-2,3][i%4];
+      var d=document.createElement('div');
+      d.className='pol';
+      d.style.cssText='left:'+x+'px;top:'+y+'px;width:'+cw+'px;height:'+(ch+24)+'px;transform:rotate('+rot+'deg)';
+      var im=document.createElement('img');
+      im.src=src; im.loading='lazy';
+      d.appendChild(im);
+      var sk=document.createElement('span');sk.className='sk';sk.textContent=SK[i%SK.length];d.appendChild(sk);
+      var ht=document.createElement('span');ht.className='ht';ht.textContent=HT[i%2];d.appendChild(ht);
+      d.onclick=function(e){
+        e.stopPropagation();
+        var was=d.classList.contains('on');
+        inner.querySelectorAll('.pol').forEach(function(p){p.classList.remove('on')});
+        if(!was)d.classList.add('on');
+      };
+      inner.appendChild(d);
+      if(y+ch+24>maxB)maxB=y+ch+24;
+    });
+
+    inner.style.height=(maxB+30)+'px';
+  }
+
+  board.onclick=function(){
+    inner.querySelectorAll('.pol').forEach(function(p){p.classList.remove('on')});
+  };
+  build();
+  window.addEventListener('resize',function(){setTimeout(build,150)});
+  new MutationObserver(function(){
+    if(document.getElementById('slide14').classList.contains('active'))setTimeout(build,150);
+  }).observe(document.getElementById('slide14'),{attributes:true,attributeFilter:['class']});
+})();
+
+setTimeout(function(){document.getElementById('loader').classList.add('hide');},4000);
+
+/* TYPEWRITER */
+function typeW(el,text,sp,key){
+  if(tt[key])clearTimeout(tt[key]);
+  el.innerHTML='';
+  var c=document.createElement('span');c.className='cursor';el.appendChild(c);
+  var i=0;
+  (function s(){
+    if(i<text.length){
+      c.insertAdjacentText('beforebegin',text.charAt(i));i++;
+      tt[key]=setTimeout(s,/[.,!?…]/.test(text.charAt(i-1))?sp*6:sp);
+    }else c.classList.add('done');
+  })();
+}
+function stopT(){for(var k in tt){clearTimeout(tt[k]);}}
+
+function runTyping(sl){
+  stopT();
+  var t=sl.querySelector('.tw-title'),p=sl.querySelector('.tw-text');
+  if(t)typeW(t,t.getAttribute('data-full')||'',45,'t');
+  if(p)setTimeout(function(){typeW(p,p.getAttribute('data-full')||'',28,'p');},
+    t?(t.getAttribute('data-full')||'').length*45+150:0);
+}
+
+/* SLIDE */
+function showSlide(n){
+  slides.forEach(function(s){s.classList.remove('active')});
+  var sl=slides[n];
+  sl.classList.add('active');
+  var bg=sl.getAttribute('data-bg');
+  if(bg)document.body.style.backgroundImage='url('+bg+')';
+  document.getElementById('main-card').classList.toggle('gallery-open',sl.id==='slide14');
+  document.getElementById('prevBtn').disabled=(n===0);
+  document.getElementById('nextBtn').textContent=(n===total-1)?'open🎁':'Lanjut';
+  runTyping(sl);
+  if(n===total-1)startConfetti();else stopConfetti();
+}
+function changeSlide(d){
+  var n=idx+d;
+  if(n<0||n>=total)return;
+  idx=n;showSlide(idx);
+}
+function nextAction(){
+  if(idx<total-1)changeSlide(1);
+  else openVideo();
+}
+
+/* START */
+function startJourney(){
+  document.getElementById('start-screen').style.display='none';
+  document.getElementById('main-card').style.display='block';
+  idx=0;showSlide(0);
+  playMusic();
+}
+
+/* MUSIC */
+var mpRange=document.getElementById('mpRange');
+function setIcons(){
+  document.getElementById('mpPlayIcon').style.display=playing?'none':'block';
+  document.getElementById('mpPauseIcon').style.display=playing?'block':'none';
+}
+function playMusic(){
+  var pr=music.play();
+  if(pr&&pr.then)pr.then(function(){playing=true;setIcons();}).catch(function(){playing=false;setIcons();});
+  else{playing=true;setIcons();}
+}
+function pauseMusic(){music.pause();playing=false;setIcons();}
+document.getElementById('mpPlayBtn').onclick=function(){playing?pauseMusic():playMusic();};
+function rewindMusic(){music.currentTime=Math.max(0,music.currentTime-10);}
+function forwardMusic(){if(music.duration)music.currentTime=Math.min(music.duration,music.currentTime+10);}
+music.addEventListener('timeupdate',function(){
+  if(music.duration)mpRange.value=(music.currentTime/music.duration)*100;
+});
+mpRange.addEventListener('input',function(){
+  if(music.duration)music.currentTime=(mpRange.value/100)*music.duration;
+});
+
+/* VIDEO */
+function openVideo(){
+  pauseMusic();
+  stopConfetti();
+  document.getElementById('final-video').style.display='flex';
+  var v=document.getElementById('memorable-video');
+  v.currentTime=0;v.play();
+}
+function closeVideo(){
+  var v=document.getElementById('memorable-video');
+  v.pause();
+  document.getElementById('final-video').style.display='none';
+  startConfetti();
+}
+
+/* CONFETTI */
+var cv=document.getElementById('confetti-canvas'),cx=cv.getContext('2d'),parts=[],raf=null;
+function sizeCv(){cv.width=innerWidth;cv.height=innerHeight;}
+window.addEventListener('resize',sizeCv);sizeCv();
+function startConfetti(){
+  if(raf)return;
+  cv.style.display='block';
+  var cols=['#ff5fa2','#ffd54f','#a855f7','#4fc3f7','#81c784','#fff'];
+  parts=[];
+  for(var i=0;i<120;i++)parts.push({x:Math.random()*cv.width,y:Math.random()*-cv.height,r:4+Math.random()*6,c:cols[i%cols.length],vy:2+Math.random()*3,vx:-1+Math.random()*2,a:Math.random()*6});
+  (function loop(){
+    cx.clearRect(0,0,cv.width,cv.height);
+    parts.forEach(function(p){
+      p.y+=p.vy;p.x+=p.vx+Math.sin(p.a+=.05);
+      if(p.y>cv.height){p.y=-10;p.x=Math.random()*cv.width;}
+      cx.fillStyle=p.c;cx.fillRect(p.x,p.y,p.r,p.r*1.6);
+    });
+    raf=requestAnimationFrame(loop);
+  })();
+}
+function stopConfetti(){
+  if(raf){cancelAnimationFrame(raf);raf=null;}
+  cx.clearRect(0,0,cv.width,cv.height);
+  cv.style.display='none';
+}
+
+/* PUZZLE HATI — ganti PUZZLE_IMG dengan link fotomu, PUZZLE_N = ukuran grid (3 = 3x3) */
+var PUZZLE_IMG="https://i.imgur.com/vH5TvdG.jpeg";
+var PUZZLE_N=3;
+(function(){
+  var N=PUZZLE_N,bd=document.getElementById('pzBoard'),info=document.getElementById('pzInfo');
+  var enter=document.getElementById('pzEnter'),shuf=document.getElementById('pzShuffle');
+  var order=[],tiles=[],sel=null,drag=null,skipUp=false,moves=0,done=false;
+  document.getElementById('pzPrev').style.backgroundImage='url('+PUZZLE_IMG+')';
+
+  for(var id=0;id<N*N;id++){
+    var t=document.createElement('div');
+    t.className='pz-t';t.dataset.id=id;
+    t.style.width=(100/N)+'%';t.style.height=(100/N)+'%';
+    t.style.backgroundImage='url('+PUZZLE_IMG+')';
+    t.style.backgroundSize=(N*100)+'% '+(N*100)+'%';
+    t.style.backgroundPosition=((id%N)*100/(N-1))+'% '+(Math.floor(id/N)*100/(N-1))+'%';
+    bd.appendChild(t);tiles.push(t);
+  }
+  function place(){
+    order.forEach(function(id,pos){
+      tiles[id].style.left=((pos%N)*100/N)+'%';
+      tiles[id].style.top=(Math.floor(pos/N)*100/N)+'%';
+    });
+  }
+  function shuffle(){
+    do{
+      order=[];for(var i=0;i<N*N;i++)order.push(i);
+      for(var j=order.length-1;j>0;j--){var k=Math.floor(Math.random()*(j+1));var x=order[j];order[j]=order[k];order[k]=x;}
+    }while(order.every(function(v,i){return v===i}));
+    moves=0;done=false;clearSel();
+    bd.classList.remove('solved');enter.style.display='none';shuf.style.display='';
+    info.textContent='Langkah: 0';place();
+  }
+  function clearSel(){sel=null;tiles.forEach(function(t){t.classList.remove('sel')});}
+  function swap(a,b){
+    var pa=order.indexOf(a),pb=order.indexOf(b);
+    order[pa]=b;order[pb]=a;place();moves++;
+    info.textContent='Langkah: '+moves;
+    if(order.every(function(v,i){return v===i}))win();
+  }
+  function win(){
+    done=true;clearSel();
+    setTimeout(function(){
+      bd.classList.add('solved');
+      info.textContent='yeayy, selesai dalam '+moves+' langkah!';
+      enter.style.display='inline-block';shuf.style.display='none';
+      startConfetti();
+    },350);
+  }
+  bd.addEventListener('pointerdown',function(e){
+    if(done)return;
+    var t=e.target.closest('.pz-t');if(!t)return;
+    e.preventDefault();
+    var id=+t.dataset.id;
+    if(sel!==null&&sel!==id){swap(sel,id);clearSel();skipUp=true;drag=null;return;}
+    clearSel();sel=id;drag=id;t.classList.add('sel');
+  });
+  document.addEventListener('pointerup',function(e){
+    if(done||drag===null){skipUp=false;return;}
+    var el=document.elementFromPoint(e.clientX,e.clientY);
+    var t=el&&el.closest?el.closest('.pz-t'):null;
+    if(!skipUp&&t&&+t.dataset.id!==drag){swap(drag,+t.dataset.id);clearSel();}
+    drag=null;skipUp=false;
+  });
+  shuf.onclick=shuffle;
+  enter.onclick=function(){
+    stopConfetti();
+    var p=document.getElementById('puzzle');
+    p.style.opacity='0';
+    setTimeout(function(){p.style.display='none';},600);
+  };
+  shuffle();
+})();
+</script>
+</body>
+</html>
